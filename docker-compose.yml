@@ -1,0 +1,47 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: kedai-kopi-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      # Port host 3307 dipilih agar tidak bentrok dengan MariaDB/MySQL lokal.
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - kedai-kopi-network
+
+  phpmyadmin:
+    image: phpmyadmin:5.2-apache
+    container_name: kedai-kopi-phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 32M
+    ports:
+      # phpMyAdmin hanya dapat diakses dari komputer ini.
+      - "127.0.0.1:8081:80"
+    networks:
+      - kedai-kopi-network
+
+volumes:
+  mariadb_data:
+
+networks:
+  kedai-kopi-network:
+    driver: bridge
