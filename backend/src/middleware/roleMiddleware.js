@@ -1,18 +1,17 @@
+const { httpError } = require("../utils/validators");
 
 function authorizeRole(...allowedRoles) {
     return (req, res, next) => {
         if (!req.user) {
-            return res.status(401).json({
-                status: "error",
-                message: "Autentikasi diperlukan"
-            });
+            return next(
+                httpError(401, "Autentikasi diperlukan")
+            );
         }
 
         if (!allowedRoles.includes(req.user.role)) {
-            return res.status(403).json({
-                status: "error",
-                message: "Kamu tidak memiliki hak akses"
-            });
+            return next(
+                httpError(403, "Kamu tidak memiliki hak akses")
+            );
         }
 
         next();

@@ -1,14 +1,13 @@
-
 const jwt = require("jsonwebtoken");
+const { httpError } = require("../utils/validators");
 
 function authenticateToken(req, res, next) {
     const token = req.cookies?.token;
 
     if (!token) {
-        return res.status(401).json({
-            status: "error",
-            message: "Silakan login terlebih dahulu"
-        });
+        return next(
+            httpError(401, "Silakan login terlebih dahulu")
+        );
     }
 
     try {
@@ -19,11 +18,11 @@ function authenticateToken(req, res, next) {
 
         req.user = decoded;
         next();
+
     } catch (error) {
-        return res.status(401).json({
-            status: "error",
-            message: "Sesi tidak valid atau sudah kedaluwarsa"
-        });
+        next(
+            httpError(401, "Sesi tidak valid atau sudah kedaluwarsa")
+        );
     }
 }
 

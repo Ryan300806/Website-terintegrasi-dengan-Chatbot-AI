@@ -1,25 +1,33 @@
-
 const express = require("express");
-const router = express.Router();
+const rateLimit = require("express-rate-limit").rateLimit;
 
 const authController = require("../controllers/authController");
 const authenticateToken = require("../middleware/authMiddleware");
 
-const loginLimiter = require("express-rate-limit").rateLimit({
+const router = express.Router();
+
+const loginLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     limit: 5,
     standardHeaders: "draft-8",
-    legacyHeaders: false,
-    message: {
-        status: "error",
-        message: "Terlalu banyak percobaan login. Coba lagi nanti."
-    }
+    legacyHeaders: false
 });
 
-router.post("/login", loginLimiter, authController.login);
+router.post(
+    "/login",
+    loginLimiter,
+    authController.login
+);
 
-router.post("/logout", authController.logout);
+router.post(
+    "/logout",
+    authController.logout
+);
 
-router.get("/me", authenticateToken, authController.getProfile);
+router.get(
+    "/me",
+    authenticateToken,
+    authController.getProfile
+);
 
 module.exports = router;
