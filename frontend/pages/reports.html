@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Laporan Penjualan | Kedai Kopi</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Navbar -->
+            <div id="navbar-container"></div>
+
+            <!-- Page Content -->
+            <section class="page-content">
+
+                <!-- Page Header -->
+                <div class="page-header">
+
+                    <div>
+                        <h1>Laporan Penjualan</h1>
+
+                        <p>
+                            Pantau performa penjualan dan
+                            hasil transaksi Kedai Kopi.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Report Filter -->
+                <div class="card report-filter-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h5>Filter Laporan</h5>
+
+                            <p>
+                                Tentukan periode laporan yang ingin ditampilkan.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row g-3 align-items-end">
+
+                            <!-- Period -->
+                            <div class="col-md-4">
+
+                                <label
+                                    for="reportPeriod"
+                                    class="form-label"
+                                >
+                                    Periode
+                                </label>
+
+                                <select
+                                    id="reportPeriod"
+                                    class="form-select"
+                                >
+                                    <option value="today">
+                                        Hari Ini
+                                    </option>
+
+                                    <option value="week">
+                                        Minggu Ini
+                                    </option>
+
+                                    <option value="month" selected>
+                                        Bulan Ini
+                                    </option>
+
+                                    <option value="year">
+                                        Tahun Ini
+                                    </option>
+
+                                    <option value="custom">
+                                        Rentang Tanggal
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- Single Date -->
+                            <div class="col-md-4">
+
+                                <label
+                                    for="reportDate"
+                                    class="form-label"
+                                >
+                                    Tanggal Acuan
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="reportDate"
+                                    class="form-control"
+                                >
+
+                            </div>
+
+                            <!-- Custom Date Range -->
+                            <div class="col-md-4">
+
+                                <label
+                                    for="reportStartDate"
+                                    class="form-label"
+                                >
+                                    Tanggal Mulai
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="reportStartDate"
+                                    class="form-control"
+                                >
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <label
+                                    for="reportEndDate"
+                                    class="form-label"
+                                >
+                                    Tanggal Selesai
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="reportEndDate"
+                                    class="form-control"
+                                >
+
+                            </div>
+
+                            <!-- Filter Button -->
+                            <div class="col-md-4">
+
+                                <button
+                                    type="button"
+                                    id="applyReportFilter"
+                                    class="btn btn-primary w-100"
+                                >
+                                    <i class="bi bi-funnel me-2"></i>
+                                    Tampilkan Laporan
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Report Summary -->
+                <div class="report-summary">
+
+                    <!-- Revenue -->
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+
+                        <div class="stat-card-content">
+                            <span>Total Pendapatan</span>
+
+                            <h3 id="reportRevenue">
+                                Rp0
+                            </h3>
+                        </div>
+
+                    </div>
+
+                    <!-- Transactions -->
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            <i class="bi bi-receipt"></i>
+                        </div>
+
+                        <div class="stat-card-content">
+                            <span>Total Transaksi</span>
+
+                            <h3 id="reportTransactions">
+                                0
+                            </h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Sales Chart -->
+                <div class="card report-chart-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h5>Grafik Penjualan</h5>
+
+                            <p>
+                                Visualisasi pendapatan berdasarkan tanggal.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="report-chart-container">
+
+                            <canvas id="reportChart"></canvas>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Report Table -->
+                <div class="card report-table-card">
+
+                    <div class="card-header report-table-header">
+
+                        <div>
+                            <h5>Rincian Laporan</h5>
+
+                            <p>
+                                Data pendapatan dan jumlah transaksi
+                                berdasarkan tanggal.
+                            </p>
+                        </div>
+
+                        <!-- Export Buttons -->
+                        <div class="report-export-actions">
+
+                            <button
+                                type="button"
+                                id="exportCSV"
+                                class="btn btn-outline-success"
+                            >
+                                <i class="bi bi-filetype-csv me-2"></i>
+                                Export CSV
+                            </button>
+
+                            <button
+                                type="button"
+                                id="exportPDF"
+                                class="btn btn-outline-danger"
+                            >
+                                <i class="bi bi-filetype-pdf me-2"></i>
+                                Export PDF
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="table align-middle">
+
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Jumlah Transaksi</th>
+                                    <th>Total Pendapatan</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="reportTableBody">
+
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        Memuat laporan penjualan...
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Configuration -->
+    <script src="../js/config/apiConfig.js"></script>
+
+    <!-- Services -->
+    <script src="../js/services/apiService.js"></script>
+    <script src="../js/services/authService.js"></script>
+    <script src="../js/services/reportService.js"></script>
+
+    <!-- Utils -->
+    <script src="../js/utils/authGuard.js"></script>
+    <script src="../js/utils/formatCurrency.js"></script>
+    <script src="../js/utils/formatDate.js"></script>
+    <script src="../js/utils/validation.js"></script>
+
+    <!-- Components -->
+    <script src="../js/components/notification.js"></script>
+    <script src="../js/components/modal.js"></script>
+    <script src="../js/components/sidebar.js"></script>
+    <script src="../js/components/navbar.js"></script>
+
+    <!-- Page Script -->
+    <script src="../js/pages/reports.js"></script>
+
+</body>
+</html>

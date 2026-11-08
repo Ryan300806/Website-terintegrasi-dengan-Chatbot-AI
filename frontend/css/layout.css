@@ -1,0 +1,468 @@
+
+/* ==========================================
+   LAYOUT SYSTEM
+   Sistem Informasi Asisten Bisnis Kedai Kopi
+========================================== */
+
+
+/* ==========================================
+   1. MAIN APP LAYOUT
+========================================== */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--color-background);
+}
+
+
+/* ==========================================
+   2. SIDEBAR
+========================================== */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+
+    display: flex;
+    flex-direction: column;
+
+    width: var(--sidebar-width);
+    height: 100vh;
+
+    padding: var(--spacing-6) var(--spacing-4);
+
+    color: var(--color-text-light);
+    background-color: var(--color-primary);
+
+    transition:
+        width var(--transition-normal),
+        transform var(--transition-normal);
+
+    overflow-y: auto;
+}
+
+
+/* Sidebar Brand */
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+
+    padding: 0 var(--spacing-2);
+    margin-bottom: var(--spacing-8);
+}
+
+.sidebar-brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    color: var(--color-text-light);
+    background-color: var(--color-secondary);
+
+    border-radius: var(--radius-lg);
+}
+
+.sidebar-brand-name {
+    color: var(--color-text-light);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+
+    white-space: nowrap;
+}
+
+
+/* Sidebar Navigation */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.sidebar-section-title {
+    margin: var(--spacing-4) var(--spacing-2) var(--spacing-2);
+
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+
+/* Navigation Link */
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+
+    min-height: 44px;
+    padding: var(--spacing-3);
+
+    color: #D6C7BD;
+
+    border-radius: var(--radius-md);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.sidebar-link:hover {
+    color: var(--color-text-light);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-link.active {
+    color: var(--color-text-light);
+    background-color: var(--color-secondary);
+}
+
+.sidebar-link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 22px;
+    height: 22px;
+
+    flex-shrink: 0;
+}
+
+
+/* Sidebar Bottom */
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: var(--spacing-4);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+
+/* ==========================================
+   3. MAIN CONTENT
+========================================== */
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+    min-width: 0;
+    min-height: 100vh;
+
+    margin-left: var(--sidebar-width);
+
+    transition: margin-left var(--transition-normal);
+}
+
+
+/* ==========================================
+   4. NAVBAR
+========================================== */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    height: var(--navbar-height);
+
+    padding: 0 var(--spacing-8);
+
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+
+/* Navbar Left */
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+.navbar-title {
+    margin: 0;
+
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+}
+
+
+/* Navbar Right */
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+
+/* Navbar Actions */
+
+.navbar-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    color: var(--color-text-secondary);
+    background-color: transparent;
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    transition: var(--transition-fast);
+}
+
+.navbar-action:hover {
+    color: var(--color-primary);
+    background-color: var(--color-surface-secondary);
+}
+
+
+/* ==========================================
+   5. USER PROFILE
+========================================== */
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    color: var(--color-primary);
+    background-color: var(--color-surface-secondary);
+
+    border-radius: var(--radius-full);
+
+    font-weight: var(--font-weight-semibold);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.user-role {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+
+/* ==========================================
+   6. PAGE CONTENT
+========================================== */
+
+.page-content {
+    flex: 1;
+
+    width: 100%;
+    max-width: var(--container-max-width);
+
+    margin: 0 auto;
+    padding: var(--spacing-8);
+}
+
+
+/* Page Header */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-4);
+
+    margin-bottom: var(--spacing-6);
+}
+
+.page-heading {
+    margin: 0;
+
+    color: var(--color-text-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+}
+
+.page-description {
+    margin: var(--spacing-2) 0 0;
+
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+
+/* ==========================================
+   7. CONTENT GRID
+========================================== */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--spacing-6);
+}
+
+.content-grid > * {
+    min-width: 0;
+}
+
+.col-span-12 {
+    grid-column: span 12;
+}
+
+.col-span-8 {
+    grid-column: span 8;
+}
+
+.col-span-6 {
+    grid-column: span 6;
+}
+
+.col-span-4 {
+    grid-column: span 4;
+}
+
+
+/* ==========================================
+   8. SIDEBAR OVERLAY
+========================================== */
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-fixed) - 1);
+
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+
+/* ==========================================
+   9. RESPONSIVE TABLET
+========================================== */
+
+@media (max-width: 991.98px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.show {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .navbar {
+        padding: 0 var(--spacing-5);
+    }
+
+    .page-content {
+        padding: var(--spacing-6);
+    }
+
+    .col-span-4,
+    .col-span-6,
+    .col-span-8 {
+        grid-column: span 6;
+    }
+}
+
+
+/* ==========================================
+   10. RESPONSIVE MOBILE
+========================================== */
+
+@media (max-width: 575.98px) {
+
+    .navbar {
+        height: 64px;
+        padding: 0 var(--spacing-4);
+    }
+
+    .navbar-title {
+        font-size: var(--font-size-base);
+    }
+
+    .navbar-right {
+        gap: var(--spacing-2);
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .page-content {
+        padding: var(--spacing-4);
+    }
+
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .page-heading {
+        font-size: var(--font-size-xl);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-4);
+    }
+
+    .col-span-12,
+    .col-span-8,
+    .col-span-6,
+    .col-span-4 {
+        grid-column: span 1;
+    }
+}

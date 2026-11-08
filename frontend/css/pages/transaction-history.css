@@ -1,0 +1,64 @@
+/* ==========================================
+   TRANSACTION HISTORY PAGE
+========================================== */
+
+.transaction-history-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+
+    margin-bottom: var(--spacing-5);
+}
+
+.transaction-history-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+}
+
+/* Invoice Information */
+
+.transaction-invoice {
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.transaction-date {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.transaction-amount {
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+}
+
+/* Transaction Detail */
+
+.transaction-detail-section {
+    margin-top: var(--spacing-5);
+}
+
+.transaction-detail-heading {
+    margin-bottom: var(--spacing-3);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Responsive */
+
+@media (max-width: 575.98px) {
+    .transaction-history-toolbar,
+    .transaction-history-filters {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .transaction-history-filters > * {
+        width: 100%;
+    }
+}

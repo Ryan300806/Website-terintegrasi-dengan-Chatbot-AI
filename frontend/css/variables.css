@@ -1,0 +1,148 @@
+
+:root {
+    /* =================================
+       1. COLOR SYSTEM
+    ================================= */
+
+    /* Brand Colors */
+    --color-primary: #35251F;
+    --color-primary-hover: #49342B;
+    --color-secondary: #A66B45;
+    --color-accent: #D9A574;
+
+    /* Background Colors */
+    --color-background: #F7F4EF;
+    --color-surface: #FFFFFF;
+    --color-surface-secondary: #F1EAE2;
+
+    /* Text Colors */
+    --color-text-primary: #292524;
+    --color-text-secondary: #78716C;
+    --color-text-muted: #A8A29E;
+    --color-text-light: #FFFFFF;
+
+    /* Border */
+    --color-border: #E7E1DA;
+    --color-border-focus: #A66B45;
+
+    /* Status Colors */
+    --color-success: #16804A;
+    --color-success-bg: #EAF6EE;
+
+    --color-warning: #D97706;
+    --color-warning-bg: #FFF7E6;
+
+    --color-danger: #DC2626;
+    --color-danger-bg: #FEF0F0;
+
+    --color-info: #2563EB;
+    --color-info-bg: #EFF6FF;
+
+
+    /* =================================
+       2. TYPOGRAPHY SYSTEM
+    ================================= */
+
+    --font-primary: "Inter", "Segoe UI", sans-serif;
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+
+    /* =================================
+       3. SPACING SYSTEM
+    ================================= */
+
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 0.75rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-8: 2rem;
+    --spacing-10: 2.5rem;
+    --spacing-12: 3rem;
+    --spacing-16: 4rem;
+
+
+    /* =================================
+       4. BORDER RADIUS
+    ================================= */
+
+    --radius-sm: 0.375rem;
+    --radius-md: 0.625rem;
+    --radius-lg: 0.875rem;
+    --radius-xl: 1.125rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
+
+
+    /* =================================
+       5. SHADOW SYSTEM
+    ================================= */
+
+    --shadow-sm: 0 1px 2px rgba(41, 37, 36, 0.05);
+
+    --shadow-md:
+        0 4px 12px rgba(41, 37, 36, 0.06);
+
+    --shadow-lg:
+        0 10px 25px rgba(41, 37, 36, 0.08);
+
+
+    /* =================================
+       6. LAYOUT SYSTEM
+    ================================= */
+
+    --sidebar-width: 260px;
+    --sidebar-collapsed-width: 76px;
+    --navbar-height: 72px;
+
+    --container-max-width: 1440px;
+
+
+    /* =================================
+       7. TRANSITIONS
+    ================================= */
+
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+
+
+    /* =================================
+       8. Z-INDEX
+    ================================= */
+
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-toast: 600;
+
+
+    /* =================================
+       9. RESPONSIVE BREAKPOINTS
+    ================================= */
+
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+}

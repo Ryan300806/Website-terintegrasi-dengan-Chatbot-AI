@@ -1,0 +1,98 @@
+/* ==========================================
+   SALES REPORTS PAGE
+========================================== */
+
+.reports-toolbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+
+    margin-bottom: var(--spacing-6);
+}
+
+/* Report Filters */
+
+.reports-filters {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+}
+
+.reports-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+
+    min-width: 160px;
+}
+
+/* Summary Cards */
+
+.reports-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-5);
+
+    margin-bottom: var(--spacing-6);
+}
+
+/* Report Charts */
+
+.reports-chart-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+    gap: var(--spacing-6);
+}
+
+.reports-chart-container {
+    min-width: 0;
+    min-height: 300px;
+}
+
+/* Export Actions */
+
+.reports-export-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+}
+
+.report-period-label {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Responsive */
+
+@media (max-width: 991.98px) {
+    .reports-chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .reports-summary-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-3);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .reports-toolbar,
+    .reports-filters {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .reports-filter-group {
+        width: 100%;
+    }
+
+    .reports-export-actions .btn {
+        flex: 1;
+    }
+}

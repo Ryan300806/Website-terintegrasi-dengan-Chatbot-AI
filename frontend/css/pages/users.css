@@ -1,0 +1,74 @@
+/* ==========================================
+   USER MANAGEMENT PAGE
+========================================== */
+
+.users-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+
+    margin-bottom: var(--spacing-5);
+}
+
+/* User Information */
+
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.user-cell-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+
+    color: var(--color-primary);
+    background: var(--color-surface-secondary);
+
+    border-radius: var(--radius-full);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.user-cell-name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.user-cell-email {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+/* User Form */
+
+.user-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--spacing-4);
+}
+
+.user-form-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+/* Responsive */
+
+@media (max-width: 575.98px) {
+    .users-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .user-form-grid {
+        grid-template-columns: 1fr;
+    }
+}

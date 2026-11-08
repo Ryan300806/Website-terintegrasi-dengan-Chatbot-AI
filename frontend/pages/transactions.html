@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transaksi Penjualan | Kedai Kopi</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Navbar -->
+            <div id="navbar-container"></div>
+
+            <!-- Transaction Content -->
+            <section class="page-content">
+
+                <!-- Page Header -->
+                <div class="page-header">
+
+                    <div>
+                        <h1>Transaksi Penjualan</h1>
+
+                        <p>
+                            Pilih produk dan proses pembayaran pelanggan.
+                        </p>
+                    </div>
+
+                    <a
+                        href="transaction-history.html"
+                        class="btn btn-outline-primary"
+                    >
+                        <i class="bi bi-clock-history me-2"></i>
+                        Riwayat Transaksi
+                    </a>
+
+                </div>
+
+                <!-- POS Layout -->
+                <div class="pos-layout">
+
+                    <!-- Product Section -->
+                    <section class="pos-products-section">
+
+                        <div class="pos-section-header">
+
+                            <div>
+                                <h5>Daftar Produk</h5>
+
+                                <p>
+                                    Pilih produk untuk ditambahkan ke keranjang.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- Product Search -->
+                        <div class="pos-search-wrapper">
+
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="search"
+                                id="posSearch"
+                                class="form-control"
+                                placeholder="Cari nama produk..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                        <!-- Product List -->
+                        <div
+                            id="posProductList"
+                            class="pos-product-grid"
+                        >
+
+                            <div class="pos-empty-state">
+                                Memuat daftar produk...
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Cart Section -->
+                    <aside class="pos-cart-section">
+
+                        <!-- Cart Header -->
+                        <div class="pos-cart-header">
+
+                            <div>
+                                <h5>
+                                    <i class="bi bi-cart3 me-2"></i>
+                                    Keranjang
+                                </h5>
+
+                                <p>
+                                    Daftar produk yang dipilih.
+                                </p>
+                            </div>
+
+                            <span class="badge bg-light text-dark">
+                                <span id="cartItemCount">0</span> Item
+                            </span>
+
+                        </div>
+
+                        <!-- Cart Items -->
+                        <div
+                            id="cartItems"
+                            class="pos-cart-items"
+                        >
+
+                            <div class="pos-empty-state">
+                                Keranjang masih kosong.
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Cart Summary -->
+                        <div class="pos-cart-summary">
+
+                            <div class="pos-summary-row">
+                                <span>Total Pembayaran</span>
+
+                                <strong id="cartTotal">
+                                    Rp0
+                                </strong>
+                            </div>
+
+                        </div>
+
+                        <!-- Payment Form -->
+                        <div class="pos-payment-form">
+
+                            <!-- Payment Method -->
+                            <div class="mb-3">
+
+                                <label
+                                    for="paymentMethod"
+                                    class="form-label"
+                                >
+                                    Metode Pembayaran
+                                </label>
+
+                                <select
+                                    id="paymentMethod"
+                                    class="form-select"
+                                    required
+                                >
+                                    <option value="">
+                                        Pilih metode pembayaran
+                                    </option>
+
+                                    <option value="cash">
+                                        Tunai
+                                    </option>
+
+                                    <option value="transfer">
+                                        Transfer
+                                    </option>
+
+                                    <option value="qris">
+                                        QRIS
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- Payment Amount -->
+                            <div class="mb-3">
+
+                                <label
+                                    for="paymentAmount"
+                                    class="form-label"
+                                >
+                                    Jumlah Pembayaran (Rp)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="paymentAmount"
+                                    class="form-control"
+                                    placeholder="Masukkan jumlah pembayaran"
+                                    min="0"
+                                    step="1"
+                                    required
+                                >
+
+                            </div>
+
+                            <!-- Change -->
+                            <div class="pos-change-summary">
+
+                                <span>Kembalian</span>
+
+                                <strong id="paymentChange">
+                                    Rp0
+                                </strong>
+
+                            </div>
+
+                            <!-- Checkout Button -->
+                            <button
+                                type="button"
+                                id="checkoutButton"
+                                class="btn btn-primary w-100 mt-3"
+                                disabled
+                            >
+                                <i class="bi bi-check-circle me-2"></i>
+                                Proses Pembayaran
+                            </button>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Configuration -->
+    <script src="../js/config/apiConfig.js"></script>
+
+    <!-- Services -->
+    <script src="../js/services/apiService.js"></script>
+    <script src="../js/services/authService.js"></script>
+    <script src="../js/services/productService.js"></script>
+    <script src="../js/services/transactionService.js"></script>
+
+    <!-- Utils -->
+    <script src="../js/utils/authGuard.js"></script>
+    <script src="../js/utils/formatCurrency.js"></script>
+    <script src="../js/utils/formatDate.js"></script>
+    <script src="../js/utils/validation.js"></script>
+
+    <!-- Components -->
+    <script src="../js/components/notification.js"></script>
+    <script src="../js/components/modal.js"></script>
+    <script src="../js/components/sidebar.js"></script>
+    <script src="../js/components/navbar.js"></script>
+
+    <!-- Page Script -->
+    <script src="../js/pages/transactions.js"></script>
+
+</body>
+</html>

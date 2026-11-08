@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manajemen Pengguna | Kedai Kopi</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Navbar -->
+            <div id="navbar-container"></div>
+
+            <!-- Page Content -->
+            <section class="page-content">
+
+                <!-- Page Header -->
+                <div class="page-header">
+
+                    <div>
+                        <h1>Manajemen Pengguna</h1>
+
+                        <p>
+                            Kelola akun Admin dan Kasir yang memiliki
+                            akses ke sistem Kedai Kopi.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="userAddButton"
+                    >
+                        <i class="bi bi-person-plus me-2"></i>
+                        Tambah Pengguna
+                    </button>
+
+                </div>
+
+                <!-- User Summary -->
+                <div class="user-summary">
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                        <div class="stat-card-content">
+                            <span>Total Pengguna</span>
+                            <h3 id="totalUsers">0</h3>
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            <i class="bi bi-person-check"></i>
+                        </div>
+
+                        <div class="stat-card-content">
+                            <span>Admin</span>
+                            <h3 id="totalAdmins">0</h3>
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+
+                        <div class="stat-card-content">
+                            <span>Kasir</span>
+                            <h3 id="totalCashiers">0</h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- User Toolbar -->
+                <div class="user-toolbar">
+
+                    <div class="user-search">
+
+                        <i class="bi bi-search"></i>
+
+                        <input
+                            type="search"
+                            id="userSearch"
+                            class="form-control"
+                            placeholder="Cari nama atau username..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- User Table -->
+                <div class="card user-table-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h5>Daftar Pengguna</h5>
+
+                            <p>
+                                Informasi akun yang terdaftar
+                                dalam sistem.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="table align-middle">
+
+                            <thead>
+                                <tr>
+                                    <th>Nama Pengguna</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="userTableBody">
+
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        Memuat data pengguna...
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- User Form Modal -->
+    <div
+        class="modal fade"
+        id="userModal"
+        tabindex="-1"
+        aria-labelledby="userModalTitle"
+        aria-hidden="true"
+    >
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+
+                    <h5
+                        class="modal-title"
+                        id="userModalTitle"
+                    >
+                        Tambah Pengguna
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Tutup"
+                    ></button>
+
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                    <form id="userForm">
+
+                        <input
+                            type="hidden"
+                            id="userId"
+                        >
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+
+                            <label
+                                for="userName"
+                                class="form-label"
+                            >
+                                Nama Lengkap
+                            </label>
+
+                            <input
+                                type="text"
+                                id="userName"
+                                class="form-control"
+                                placeholder="Masukkan nama lengkap"
+                                maxlength="100"
+                                required
+                            >
+
+                        </div>
+
+                        <!-- Username -->
+                        <div class="mb-3">
+
+                            <label
+                                for="userUsername"
+                                class="form-label"
+                            >
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                id="userUsername"
+                                class="form-control"
+                                placeholder="Masukkan username"
+                                maxlength="50"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+
+                            <label
+                                for="userEmail"
+                                class="form-label"
+                            >
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="userEmail"
+                                class="form-control"
+                                placeholder="Masukkan alamat email"
+                                maxlength="100"
+                            >
+
+                        </div>
+
+                        <!-- Role -->
+                        <div class="mb-3">
+
+                            <label
+                                for="userRole"
+                                class="form-label"
+                            >
+                                Role Pengguna
+                            </label>
+
+                            <select
+                                id="userRole"
+                                class="form-select"
+                                required
+                            >
+                                <option value="">
+                                    Pilih Role
+                                </option>
+
+                                <option value="admin">
+                                    Admin
+                                </option>
+
+                                <option value="cashier">
+                                    Kasir
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Password -->
+                        <div
+                            class="mb-3"
+                            id="userPasswordGroup"
+                        >
+
+                            <label
+                                for="userPassword"
+                                class="form-label"
+                            >
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="userPassword"
+                                class="form-control"
+                                placeholder="Masukkan password"
+                                autocomplete="new-password"
+                            >
+
+                            <small class="text-muted">
+                                Password minimal 12 karakter.
+                            </small>
+
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                data-bs-dismiss="modal"
+                            >
+                                Batal
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                id="userSubmitButton"
+                            >
+                                <i class="bi bi-check-lg me-2"></i>
+                                Simpan Pengguna
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Configuration -->
+    <script src="../js/config/apiConfig.js"></script>
+
+    <!-- Services -->
+    <script src="../js/services/apiService.js"></script>
+    <script src="../js/services/authService.js"></script>
+    <script src="../js/services/userService.js"></script>
+
+    <!-- Utils -->
+    <script src="../js/utils/authGuard.js"></script>
+    <script src="../js/utils/formatCurrency.js"></script>
+    <script src="../js/utils/formatDate.js"></script>
+    <script src="../js/utils/validation.js"></script>
+
+    <!-- Components -->
+    <script src="../js/components/notification.js"></script>
+    <script src="../js/components/modal.js"></script>
+    <script src="../js/components/sidebar.js"></script>
+    <script src="../js/components/navbar.js"></script>
+
+    <!-- Page Script -->
+    <script src="../js/pages/users.js"></script>
+
+</body>
+</html>
