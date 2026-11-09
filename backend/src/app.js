@@ -1,3 +1,4 @@
+
 const express = require("express");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
@@ -19,6 +20,37 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 
 const app = express();
+
+// CORS Configuration
+const allowedOrigins = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500"
+];
+
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader("Access-Control-Allow-Origin", origin);
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+        );
+        res.setHeader(
+            "Access-Control-Allow-Headers",
+            "Content-Type, Accept, Authorization"
+        );
+        res.setHeader("Vary", "Origin");
+    }
+
+    // Handle browser preflight requests
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204);
+    }
+
+    next();
+});
 
 // Security
 app.disable("x-powered-by");
