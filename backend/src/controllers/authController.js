@@ -8,11 +8,14 @@ const {
     requireText
 } = require("../utils/validators");
 
-function cookieOptions() {
+function cookieOptions(req = {}) {
+    const origin = req.headers?.origin || "";
+    const isLocalOrigin = /localhost|127\.0\.0\.1/.test(origin);
+
     return {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        secure: isLocalOrigin || process.env.NODE_ENV === "production",
+        sameSite: isLocalOrigin ? "none" : "lax",
         maxAge: 24 * 60 * 60 * 1000,
         path: "/"
     };
@@ -60,7 +63,7 @@ exports.login = asyncHandler(async (req, res) => {
         }
     );
 
-    res.cookie("token", token, cookieOptions());
+    res.cookie("token", token, cookieOptions(req));
 
     res.json({
         status: "success",
@@ -81,8 +84,8 @@ exports.login = asyncHandler(async (req, res) => {
 exports.logout = (req, res) => {
     res.clearCookie("token", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        secure: /localhost|127\.0\.0\.1/.test(req.headers?.origin || "") || process.env.NODE_ENV === "production",
+        sameSite: /localhost|127\.0\.0\.1/.test(req.headers?.origin || "") ? "none" : "lax",
         path: "/"
     });
 
