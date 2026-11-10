@@ -35,6 +35,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function bindCategoryEvents() {
+    document.getElementById("categoryAddButton")
+        ?.addEventListener("click", () => openCategoryForm());
+
     document.getElementById("categoryForm")
         ?.addEventListener("submit", saveCategory);
 }
