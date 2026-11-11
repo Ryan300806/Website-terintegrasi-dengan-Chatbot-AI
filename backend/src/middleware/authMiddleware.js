@@ -2,7 +2,12 @@ const jwt = require("jsonwebtoken");
 const { httpError } = require("../utils/validators");
 
 function authenticateToken(req, res, next) {
-    const token = req.cookies?.token;
+    const cookieToken = req.cookies?.token;
+    const authHeader = req.headers.authorization || "";
+    const bearerToken = authHeader.startsWith("Bearer ")
+        ? authHeader.slice(7).trim()
+        : "";
+    const token = bearerToken || cookieToken;
 
     if (!token) {
         return next(

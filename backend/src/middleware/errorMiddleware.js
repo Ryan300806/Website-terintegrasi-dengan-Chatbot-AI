@@ -18,6 +18,10 @@ function errorMiddleware(error, req, res, next) {
     }
 
     const status = Number(error.status) || 500;
+    const message =
+        error.message && error.message !== "Terjadi kesalahan pada server"
+            ? error.message
+            : "Terjadi kesalahan pada server";
 
     if (status >= 500) {
         console.error(error);
@@ -25,10 +29,7 @@ function errorMiddleware(error, req, res, next) {
 
     res.status(status).json({
         status: "error",
-        message:
-            status >= 500
-                ? "Terjadi kesalahan pada server"
-                : error.message
+        message
     });
 }
 

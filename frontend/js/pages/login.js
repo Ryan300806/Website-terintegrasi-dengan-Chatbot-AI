@@ -33,7 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             if (response.status === "success") {
-                showMessage("Login berhasil!", "success");
+                const bearerToken = response.data?.token;
+
+                if (bearerToken) {
+                    localStorage.setItem("accessToken", bearerToken);
+                    console.log("Bearer Token:", `Bearer ${bearerToken}`);
+                }
+
+                showMessage("Login berhasil! Bearer Token aktif.", "success");
 
                 window.location.href = "dashboard.html";
             }

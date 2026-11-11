@@ -20,16 +20,23 @@ const APIService = {
             controller.abort();
         }, API_CONFIG.TIMEOUT);
 
+        const token = localStorage.getItem("accessToken");
+        const headers = {
+            ...API_CONFIG.HEADERS,
+            ...options.headers
+        };
+
+        if (token) {
+            headers.Authorization = `Bearer ${token}`;
+        }
+
         try {
             const response = await fetch(url, {
                 method: options.method || "GET",
 
                 credentials: API_CONFIG.CREDENTIALS,
 
-                headers: {
-                    ...API_CONFIG.HEADERS,
-                    ...options.headers
-                },
+                headers,
 
                 body: options.body !== undefined
                     ? JSON.stringify(options.body)

@@ -21,6 +21,42 @@ const reportRoutes = require("./routes/reportRoutes");
 
 const app = express();
 
+function normalizeBigInt(value) {
+    if (typeof value === "bigint") {
+        return Number(value);
+    }
+
+    if (Array.isArray(value)) {
+        return value.map(normalizeBigInt);
+    }
+
+    if (value && typeof value === "object") {
+        const normalized = {};
+
+        Object.entries(value).forEach(([key, item]) => {
+            normalized[key] = normalizeBigInt(item);
+        });
+
+        return normalized;
+    }
+
+    return value;
+}
+
+app.use((req, res, next) => {
+    const originalJson = res.json.bind(res);
+
+    res.json = function (body) {
+        try {
+            return originalJson(normalizeBigInt(body));
+        } catch (error) {
+            return originalJson(body);
+        }
+    };
+
+    next();
+});
+
 // CORS Configuration
 const allowedOrigins = [
     "http://localhost:5500",

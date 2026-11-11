@@ -63,11 +63,14 @@ exports.login = asyncHandler(async (req, res) => {
     );
 
     res.cookie("token", token, cookieOptions());
+    res.setHeader("Authorization", `Bearer ${token}`);
 
     res.json({
         status: "success",
         message: "Login berhasil",
         data: {
+            token,
+            tokenType: "Bearer",
             user: {
                 user_id: user.user_id,
                 name: user.name,
